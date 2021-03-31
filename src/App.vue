@@ -1,25 +1,20 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">动画</router-link> |
-      <router-link to="/about">布局</router-link> |
-      <router-link to="/three">组件</router-link>
-    </div>
-    <router-view/>
+  <div id="box">
+    <home></home>
   </div>
 </template>
 
-
+<script>
+import Home from './views/Home/Home.vue'
+  export default{
+  name:'App',
+  components: {
+    Home
+    }
+  }
+</script>
 
 <style>
-@import './assets/css/reset.css';
+@import './assets/css/base.css';
 @import './assets/fontawesome/css/all.css';
-
-#nav{
-  min-width: 1000px;
-  height: 50px;
-  line-height: 50px;
-  background-color: aqua;
-}
-
 </style>

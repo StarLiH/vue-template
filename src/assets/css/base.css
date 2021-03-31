@@ -1,0 +1,8 @@
+@import "./reset.css";
+
+.clearfix::before,
+.clearfix::after{
+  content:"";
+  display:block;
+  clear: both;
+}
