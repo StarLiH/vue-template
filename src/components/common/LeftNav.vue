@@ -63,6 +63,29 @@
   .map .map-spot a:hover{
     background-color: rgba(17, 11, 11, 0.5);
   }
+  .appear{
+    animation: moveB 1s 0s 1;
+  }
+  @keyframes moveB {
+    0% {
+      opacity: 0;
+    }
+    20% {
+      opacity: 0.2;
+    }
+    40% {
+      opacity: 0.4;
+    }
+    60% {
+      opacity: 0.6;
+    }
+    80% {
+      opacity: 0.8;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 </style>
 
 <script>
@@ -99,6 +122,10 @@
               allA[i].style.backgroundColor="";
             };
             allA[i].style.backgroundColor="rgba(17, 11, 11, 0.5)";
+            imgAll.classList.add("appear");
+            setTimeout(function(){
+              imgAll.classList.remove("appear");
+            },1000)
             _this.index=i
           }
         };
@@ -113,6 +140,10 @@
               allA[i].style.backgroundColor="";
             };
           allA[_this.index].style.backgroundColor="rgba(17, 11, 11, 0.5)";
+          imgAll.classList.add("appear");
+          setTimeout(function(){
+            imgAll.classList.remove("appear");
+          },1000)
         };
         //点击右按钮切换
         rightA.onclick=function(){
@@ -125,6 +156,10 @@
               allA[i].style.backgroundColor="";
             };
           allA[_this.index].style.backgroundColor="rgba(17, 11, 11, 0.5)";
+          imgAll.classList.add("appear");
+          setTimeout(function(){
+            imgAll.classList.remove("appear");
+          },1000)
         };
         //自动切换图片
         function play(){
@@ -136,6 +171,10 @@
               allA[i].style.backgroundColor="";
             };
             allA[_this.index].style.backgroundColor="rgba(17, 11, 11, 0.5)";
+            imgAll.classList.add("appear");
+            setTimeout(function(){
+              imgAll.classList.remove("appear");
+            },1000)
           },2000);
         }
         play();
