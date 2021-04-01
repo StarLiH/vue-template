@@ -71,6 +71,7 @@
     data(){
       return {
         index:0,
+        timer:{},
         imgArr:[
           require("@/assets/img/00.jpg"),
           require("@/assets/img/01.jpg"),
@@ -87,34 +88,67 @@
         let _this=this;
         let imgAll=document.getElementsByTagName("img")[0];
         let allA=document.getElementsByClassName("map-spot")[0].children;
-        allA[_this.index].style.backgroundColor="rgba(17, 11, 11, 0.5)";
+        let leftA=document.getElementsByClassName("left-a")[0];
+        let rightA=document.getElementsByClassName("right-a")[0];
+        allA[0].style.backgroundColor="rgba(17, 11, 11, 0.5)";
         //点击超链接切换图片
         for(let i=0;i<allA.length;i++){
           allA[i].onclick=function(){
-            _this.index=i;
             imgAll.src=_this.imgArr[i];
             for(let i=0 ; i<allA.length ;i++){
               allA[i].style.backgroundColor="";
             };
             allA[i].style.backgroundColor="rgba(17, 11, 11, 0.5)";
+            _this.index=i
           }
         };
-      },
-      leftSwitch:function(){
-        let _this=this;
-        let leftA=document.getElementsByClassName("left-a")[0];
-        let imgAll=document.getElementsByTagName("img")[0];
-        let allA=document.getElementsByClassName("map-spot")[0].children;
-        let index = allA.length;
+        //点击左按钮切换
         leftA.onclick=function(){
-          let i = index-1;
-          imgAll.src=_this.imgArr[i];
+          _this.index--;
+          if(_this.index<0){
+            _this.index=5
+          }
+          imgAll.src=_this.imgArr[_this.index];
+          for(let i=0 ; i<allA.length ;i++){
+              allA[i].style.backgroundColor="";
+            };
+          allA[_this.index].style.backgroundColor="rgba(17, 11, 11, 0.5)";
+        };
+        //点击右按钮切换
+        rightA.onclick=function(){
+          _this.index++;
+          if(_this.index>5){
+            _this.index=0
+          }
+          imgAll.src=_this.imgArr[_this.index];
+          for(let i=0 ; i<allA.length ;i++){
+              allA[i].style.backgroundColor="";
+            };
+          allA[_this.index].style.backgroundColor="rgba(17, 11, 11, 0.5)";
+        };
+        //自动切换图片
+        function play(){
+          _this.timer=setInterval(function(){
+            _this.index++;
+            _this.index %= _this.imgArr.length
+            imgAll.src=_this.imgArr[_this.index]
+            for(let i=0 ; i<allA.length ;i++){
+              allA[i].style.backgroundColor="";
+            };
+            allA[_this.index].style.backgroundColor="rgba(17, 11, 11, 0.5)";
+          },2000);
+        }
+        play();
+        imgAll.onmouseout=function(){
+          play()
+        }
+        imgAll.onmouseover=function(){
+          clearInterval(_this.timer)
         }
       }
     },
     mounted(){
       this.carouselMap();
-      this.leftSwitch();
     }
   }
 </script>
