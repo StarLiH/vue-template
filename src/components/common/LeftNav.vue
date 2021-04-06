@@ -26,10 +26,10 @@
   }
   .map{
     position: absolute;
-    left: 20%;
+    left: 150px;
   }
   .map img{
-    width: 800px;
+    width: 1000px;
   }
   .map span{
     font-size: 90px;
@@ -37,11 +37,13 @@
     color: rgb(196, 196, 196,0.5)
   }
   .map .m-left{
-    top:35%
+    top:35%;
+    z-index: 100;
   }
   .map .m-right{
     top:35%;
-    right: 0
+    right: 0;
+    z-index: 100;
   }
   .map span:hover{
     color: rgba(233, 231, 231, 0.8)
@@ -89,105 +91,19 @@
 </style>
 
 <script>
+import {carouselMap} from 'components/content/map'
   export default {
     name:'LeftNav',
     data(){
       return {
-        index:0,
-        timer:{},
-        imgArr:[
-          require("@/assets/img/00.jpg"),
-          require("@/assets/img/01.jpg"),
-          require("@/assets/img/02.jpg"),
-          require("@/assets/img/03.jpg"),
-          require("@/assets/img/04.jpg"),
-          require("@/assets/img/05.jpg")
-        ]
+        Map:carouselMap
       }
     },
     methods:{
-      //轮播图
-      carouselMap:function(){
-        let _this=this;
-        let imgAll=document.getElementsByTagName("img")[0];
-        let allA=document.getElementsByClassName("map-spot")[0].children;
-        let leftA=document.getElementsByClassName("left-a")[0];
-        let rightA=document.getElementsByClassName("right-a")[0];
-        allA[0].style.backgroundColor="rgba(17, 11, 11, 0.5)";
-        //点击超链接切换图片
-        for(let i=0;i<allA.length;i++){
-          allA[i].onclick=function(){
-            imgAll.src=_this.imgArr[i];
-            for(let i=0 ; i<allA.length ;i++){
-              allA[i].style.backgroundColor="";
-            };
-            allA[i].style.backgroundColor="rgba(17, 11, 11, 0.5)";
-            imgAll.classList.add("appear");
-            setTimeout(function(){
-              imgAll.classList.remove("appear");
-            },1000)
-            _this.index=i
-          }
-        };
-        //点击左按钮切换
-        leftA.onclick=function(){
-          _this.index--;
-          if(_this.index<0){
-            _this.index=5
-          }
-          imgAll.src=_this.imgArr[_this.index];
-          for(let i=0 ; i<allA.length ;i++){
-              allA[i].style.backgroundColor="";
-            };
-          allA[_this.index].style.backgroundColor="rgba(17, 11, 11, 0.5)";
-          imgAll.classList.add("appear");
-          setTimeout(function(){
-            imgAll.classList.remove("appear");
-          },1000)
-        };
-        //点击右按钮切换
-        rightA.onclick=function(){
-          _this.index++;
-          if(_this.index>5){
-            _this.index=0
-          }
-          imgAll.src=_this.imgArr[_this.index];
-          for(let i=0 ; i<allA.length ;i++){
-              allA[i].style.backgroundColor="";
-            };
-          allA[_this.index].style.backgroundColor="rgba(17, 11, 11, 0.5)";
-          imgAll.classList.add("appear");
-          setTimeout(function(){
-            imgAll.classList.remove("appear");
-          },1000)
-        };
-        //自动切换图片
-        function play(){
-          _this.timer=setInterval(function(){
-            _this.index++;
-            _this.index %= _this.imgArr.length
-            imgAll.src=_this.imgArr[_this.index]
-            for(let i=0 ; i<allA.length ;i++){
-              allA[i].style.backgroundColor="";
-            };
-            allA[_this.index].style.backgroundColor="rgba(17, 11, 11, 0.5)";
-            imgAll.classList.add("appear");
-            setTimeout(function(){
-              imgAll.classList.remove("appear");
-            },1000)
-          },2000);
-        }
-        play();
-        imgAll.onmouseout=function(){
-          play()
-        }
-        imgAll.onmouseover=function(){
-          clearInterval(_this.timer)
-        }
-      }
+      
     },
     mounted(){
-      this.carouselMap();
+      this.Map()
     }
   }
 </script>
